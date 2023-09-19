@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     devshell = {
       url = "github:numtide/devshell";
@@ -14,6 +14,14 @@
       url = "github:zmkfirmware/zmk";
       flake = false;
     };
+    npmlock2nix = {
+      url = "github:nix-community/npmlock2nix";
+      flake = false;
+    };
+    keymap-editor = {
+      url = "github:nickcoutsos/keymap-editor";
+      flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, flake-utils, ... }@inputs:
@@ -24,10 +32,20 @@
             inherit system;
             overlays = [
               inputs.devshell.overlays.default
+              (final: prev: {
+                npmlock2nix = import inputs.npmlock2nix { pkgs = prev; };
+              })
             ];
           };
         in
         rec {
+          packages.keymap-editor-web-app = pkgs.npmlock2nix.v2.node_modules {
+            src = inputs.keymap-editor + "/";
+            nodejs = pkgs.nodejs_18;
+            # NODE_OPTIONS = "--max_old_space_size=4096";
+          };
+
+
           devShell =
             with inputs.zephyr-flake-utils.packages.${system};
             let
@@ -38,6 +56,9 @@
               ZEPHYR_TOOLCHAIN_VARIANT = "zephyr";
               ZEPHYR_SDK_INSTALL_DIR = sdk;
 
+              # comment out to use a local zmk
+              ZMK_PATH = inputs.zmk;
+
               nativeBuildInputs = with pkgs; [
                 sdk
                 toolchain
@@ -46,11 +67,12 @@
                 ninja
                 dtc
 
+                nodejs
                 nushell
+                udiskie
               ];
-              shellHook = ''
-                exec nu --execute "source ./script.nu"
-              '';
+              # https://zmk.dev/docs/development/setup
+              # cd zmk && west init -l app/
             };
         }
       );

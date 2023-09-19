@@ -1,23 +1,23 @@
 module commands {
-  use std 'log debug'
-  use std 'log info'
-  use std 'log warning'
-  use std 'log error'
-  use std 'log critical'
+  use std log 
+
+  export-env {
+    let-env PRJ_ROOT = (pwd)
+  }
 
   export def boards [] {
-    ls $"(pwd)/zmk/app/boards/**/*.yaml"
+    ls $"($env.PRJ_ROOT)/zmk/app/boards/**/*.yaml"
       | each {|e| $e.name | open | get identifier}
   }
 
   export def shields [] {
-    ls $"(pwd)/zmk/app/boards/shields/**/*.y*ml"
+    ls $"($env.PRJ_ROOT)/zmk/app/boards/shields/**/*.y*ml"
       | each {|e| $e.name | open | get id }
       | flatten
   }
 
   export def configs [] {
-    cd $"(pwd)/configs/"
+    cd $"($env.PRJ_ROOT)/configs/"
     ls | get name
   }
 
@@ -27,10 +27,9 @@ module commands {
     --shield (-s):string@shields, # the shield to build for
   ] {
     let version = "3.2"
-    let project_root = (pwd)
 
     # find the shield info
-    let shield_info = ( ls $"($project_root)/zmk/app/boards/shields/**/*.y*ml"
+    let shield_info = ( ls $"($env.PRJ_ROOT)/zmk/app/boards/shields/**/*.y*ml"
       | each {|e| $e.name | open }
       | where id == $shield
       )
@@ -45,13 +44,16 @@ module commands {
 
     for shield in $shield_info.siblings {
       # create builddir
-      mkdir $"($project_root)/build"
+      mkdir $"($env.PRJ_ROOT)/build"
 
       # actually compile the firmware
 
-      cd $"($project_root)/zmk/app"
-      west build --build-dir $"($project_root)/build/($board)-($shield)" --board $board -- -Wno-dev $"-DSHIELD=($shield)" $"-DZMK_CONFIG=($project_root)/configs/($config)/config"
-      cd $project_root
+      cd $"($env.PRJ_ROOT)/zmk/app"
+
+
+      west build --build-dir $"($env.PRJ_ROOT)/build/($board)-($shield)" --board $board -- -Wno-dev $"-DSHIELD=($shield)" $"-DZMK_CONFIG=($env.PRJ_ROOT)/configs/($config)/config"
+
+      cd ($env.PRJ_ROOT)
 
       cp $"build/($board)-($shield)/zephyr/zmk.uf2" $"build/($board)-($shield).uf2"
     }
@@ -62,15 +64,13 @@ module commands {
   }
 
   def list-uf2-firmwares [] {
-    let project_root = (pwd)
-    ls $"($project_root)/build/*.uf2" | get name | path parse | get stem
+    ls $"($env.PRJ_ROOT)/build/*.uf2" | get name | path parse | get stem
   }
 
   export def "flash uf2" [
     target: string@list-uf2-targets,
     fw: string@list-uf2-firmwares,
   ] {
-    let project_root = (pwd)
       let firmwares = (list-uf2-firmwares)
       let targets = (list-uf2-targets)
 
@@ -79,9 +79,9 @@ module commands {
         | last
         )
 
-      cp $"($project_root)/build/$($firmwares | find $fw).uf2" $mount_path
+      cp $"($env.PRJ_ROOT)/build/$($firmwares | find $fw).uf2" $mount_path
     }
-    # ls $"($project_root)/build/*.uf2" |
+    # ls $"($env.PRJ_ROOT)/build/*.uf2" |
   # }
 
 
