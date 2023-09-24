@@ -36,7 +36,6 @@
         conf_layer {
             bindings = <&tog 3>;
             key-positions = <36 37 38>;
-            layers = <>;
         };
     };
 
@@ -90,9 +89,9 @@
 
             bindings = <
 &trans  &none  &none     &kp UP    &none      &none        &kp HOME   &kp N7  &kp N8   &kp N9  &kp END    &trans
-&trans  &none  &kp LEFT  &kp DOWN  &kp RIGHT  &kp LCTRL    &kp RCTRL  &kp N4  &kp N5   &kp N6  &kp PG_UP  &rgb_ug RGB_EFF
-&trans  &none  &none     &none     &none      &kp LSHFT    &kp RSHFT  &kp N1  &kp N2   &kp N3  &kp PG_DN  &rgb_ug RGB_TOG
-                         &trans    &trans     &trans       &kp LGUI   &kp N0  &kp DOT
+&trans  &none  &kp LEFT  &kp DOWN  &kp RIGHT  &kp LCTRL    &kp RCTRL  &kp N4  &kp N5   &kp N6  &kp PG_UP  &trans
+&trans  &none  &none     &none     &none      &kp LSHFT    &kp RSHFT  &kp N1  &kp N2   &kp N3  &kp PG_DN  &trans
+                         &trans    &trans     &trans       &trans     &kp N0  &kp DOT
             >;
         };
 
@@ -107,7 +106,7 @@
 &kp TAB    &kp EXCL  &kp AT  &kp HASH  &kp DLLR  &kp PRCNT    &kp CARET  &kp AMPS   &kp KP_MULTIPLY  &kp LPAR  &kp RPAR  &trans
 &kp LCTRL  &kp F1    &kp F2  &kp F3    &kp F4    &kp F5       &kp MINUS  &kp EQUAL  &kp LBKT         &kp RBKT  &kp BSLH  &kp GRAVE
 &kp LSHFT  &kp F6    &kp F7  &kp F8    &kp F9    &kp F10      &kp UNDER  &kp PLUS   &kp LBRC         &kp RBRC  &kp PIPE  &kp TILDE
-                             &kp F11   &trans    &kp F12      &none      &trans     &none
+                             &kp F11   &trans    &kp F12      &trans     &none      &none
             >;
         };
 
