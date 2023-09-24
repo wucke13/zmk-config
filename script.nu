@@ -2,7 +2,14 @@ module commands {
   use std log 
 
   export-env {
-    let-env PRJ_ROOT = (pwd)
+    $env.PRJ_ROOT = (pwd)
+  }
+
+  export def update-west [] {
+    cd $"($env.PRJ_ROOT)/zmk"
+    # or west init
+    west update
+    cd ..
   }
 
   export def boards [] {
@@ -16,13 +23,7 @@ module commands {
       | flatten
   }
 
-  export def configs [] {
-    cd $"($env.PRJ_ROOT)/configs/"
-    ls | get name
-  }
-
   export def compile [
-    config:string@configs # the configuration to build
     --board (-b):string@boards, # the board to build for
     --shield (-s):string@shields, # the shield to build for
   ] {
@@ -51,7 +52,7 @@ module commands {
       cd $"($env.PRJ_ROOT)/zmk/app"
 
 
-      west build --build-dir $"($env.PRJ_ROOT)/build/($board)-($shield)" --board $board -- -Wno-dev $"-DSHIELD=($shield)" $"-DZMK_CONFIG=($env.PRJ_ROOT)/configs/($config)/config"
+      west build --build-dir $"($env.PRJ_ROOT)/build/($board)-($shield)" --board $board -- -Wno-dev $"-DSHIELD=($shield)" $"-DZMK_CONFIG=($env.PRJ_ROOT)/config"
 
       cd ($env.PRJ_ROOT)
 
