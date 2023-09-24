@@ -45,6 +45,25 @@
             # NODE_OPTIONS = "--max_old_space_size=4096";
           };
 
+          packages.zmk-viewer = with pkgs; buildGoModule rec {
+            pname = "zmk-viewer";
+            version = "1.5.0";
+            src = fetchFromGitHub {
+              owner = "MrMarble";
+              repo = pname;
+              rev = "v${version}";
+              hash = "sha256-gyu0bf5XUaBWxtpoLeFIbPGqPPD2bJjEeyjfLdFy0hA=";
+            };
+            vendorHash = "sha256-G0p0VYCHpQE/htq452bWUZbFCxAkvwk76paiG+i72cg=";
+
+            meta = with lib; {
+              description = "Cli tool to generate preview images from a zmk .keymap file";
+              homepage = "https://github.com/MrMarble/zmk-viewer";
+              license = licenses.mit;
+              maintainers = with maintainers; [ wucke13 ];
+            };
+          };
+
 
           devShell =
             with inputs.zephyr-flake-utils.packages.${system};
