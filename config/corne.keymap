@@ -11,7 +11,7 @@
 #include <dt-bindings/zmk/rgb.h>
 
 &led_strip {
-    chain-length = <27>; // 6 underglow, 21 backlight
+    chain-length = <27>;// 6 underglow, 21 backlight
 };
 
 / {
@@ -88,10 +88,10 @@
             //                    |    |    |MOD|-|MOD| 0 | . |
 
             bindings = <
-&trans  &none  &none     &kp UP    &none      &none        &kp HOME   &kp N7  &kp N8   &kp N9  &kp END    &trans
-&trans  &none  &kp LEFT  &kp DOWN  &kp RIGHT  &kp LCTRL    &kp RCTRL  &kp N4  &kp N5   &kp N6  &kp PG_UP  &trans
-&trans  &none  &none     &none     &none      &kp LSHFT    &kp RSHFT  &kp N1  &kp N2   &kp N3  &kp PG_DN  &trans
-                         &trans    &trans     &trans       &trans     &kp N0  &kp DOT
+&trans  &kp C_VOL_UP       &none     &kp UP    &none      &none        &kp HOME   &kp N7  &kp N8   &kp N9  &kp END    &trans
+&trans  &kp C_VOLUME_DOWN  &kp LEFT  &kp DOWN  &kp RIGHT  &kp LCTRL    &kp RCTRL  &kp N4  &kp N5   &kp N6  &kp PG_UP  &trans
+&trans  &kp C_MUTE         &none     &none     &none      &kp LSHFT    &kp RSHFT  &kp N1  &kp N2   &kp N3  &kp PG_DN  &trans
+                                     &trans    &trans     &trans       &trans     &kp N0  &kp DOT
             >;
         };
 
