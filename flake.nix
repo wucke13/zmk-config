@@ -6,10 +6,7 @@
       url = "github:numtide/devshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    zephyr-flake-utils = {
-      url = "github:wucke13/zephyr-flake-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    zephyr-flake-utils.url = "github:wucke13/zephyr-flake-utils";
     zmk = {
       url = "github:zmkfirmware/zmk";
       flake = false;
