@@ -115,22 +115,6 @@
         "type": "github"
       }
     },
-    "keymap-editor": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1698707225,
-        "narHash": "sha256-gJfJoLoFJuJUuFHd/UfCrMMALhADGzbe4V0CfMjfePE=",
-        "owner": "nickcoutsos",
-        "repo": "keymap-editor",
-        "rev": "e7946792cf674db20ab72ab67fea759fff4c3ccc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nickcoutsos",
-        "repo": "keymap-editor",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1708702655,
@@ -161,29 +145,11 @@
         "type": "github"
       }
     },
-    "npmlock2nix": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1673447413,
-        "narHash": "sha256-sJM82Sj8yfQYs9axEmGZ9Evzdv/kDcI9sddqJ45frrU=",
-        "owner": "nix-community",
-        "repo": "npmlock2nix",
-        "rev": "9197bbf397d76059a76310523d45df10d2e4ca81",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "npmlock2nix",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "devshell": "devshell",
         "flake-utils": "flake-utils_2",
-        "keymap-editor": "keymap-editor",
         "nixpkgs": "nixpkgs",
-        "npmlock2nix": "npmlock2nix",
         "zephyr-flake-utils": "zephyr-flake-utils",
         "zmk": "zmk"
       }

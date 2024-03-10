@@ -10,14 +10,6 @@
       url = "github:zmkfirmware/zmk";
       flake = false;
     };
-    npmlock2nix = {
-      url = "github:nix-community/npmlock2nix";
-      flake = false;
-    };
-    keymap-editor = {
-      url = "github:nickcoutsos/keymap-editor";
-      flake = false;
-    };
   };
 
   outputs = { self, nixpkgs, flake-utils, ... }@inputs:
@@ -35,11 +27,6 @@
           };
         in
         rec {
-          packages.keymap-editor-web-app = pkgs.npmlock2nix.v2.node_modules {
-            src = inputs.keymap-editor + "/";
-            nodejs = pkgs.nodejs_18;
-            # NODE_OPTIONS = "--max_old_space_size=4096";
-          };
 
           packages.zmk-viewer = with pkgs; buildGoModule rec {
             pname = "zmk-viewer";
