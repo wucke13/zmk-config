@@ -55,21 +55,21 @@
             compatible = "zmk,behavior-tap-dance";
             label = "SUPER_SHIFT_DANCE";
             #binding-cells = <0>;
-            bindings =
-                <&kp LEFT_GUI>,
-                <&kp LS(LGUI)>;
-
-            tapping-term-ms = <250>;
+            bindings = <&kp RIGHT_GUI>, <&kp RS(RIGHT_GUI)>;
         };
+
         altgr_alt_dance: altgr_alt_dance {
             compatible = "zmk,behavior-tap-dance";
             label = "ALTGR_ALT_DANCE";
             #binding-cells = <0>;
-            bindings =
-                <&kp RIGHT_ALT>,
-                <&kp LALT>;
+            bindings = <&kp RIGHT_ALT>, <&kp LALT>;
+        };
 
-            tapping-term-ms = <250>;
+        layer_1_gui_dance: layer_1_gui_dance {
+            compatible = "zmk,behavior-tap-dance";
+            label = "LAYER_1_GUI_DANCE";
+            #binding-cells = <0>;
+            bindings = <&to 1>, <&kp LEFT_GUI>, <&kp LS(LEFT_GUI)>;
         };
     };
 
@@ -84,10 +84,10 @@
             //                  |ALT/ESC| NUM |MOD/SPC|-|MOD/ENT| SYM |ALTgr/BKSP|
 
             bindings = <
-&kp TAB    &kp Q  &kp W  &kp E     &kp R  &kp T        &kp Y               &kp U  &kp I             &kp O    &kp P     &kp DELETE
-&kp LCTRL  &kp A  &kp S  &kp D     &kp F  &kp G        &kp H               &kp J  &kp K             &kp L    &kp SEMI  &kp SQT
-&kp LSHFT  &kp Z  &kp X  &kp C     &kp V  &kp B        &kp N               &kp M  &kp COMMA         &kp DOT  &kp FSLH  &kp RSHFT
-                         &kp BSPC  &mo 1  &kp SPACE    &super_shift_dance  &mo 2  &altgr_alt_dance
+&kp TAB    &kp Q  &kp W  &kp E     &kp R               &kp T        &kp Y               &kp U  &kp I             &kp O    &kp P     &kp DELETE
+&kp LCTRL  &kp A  &kp S  &kp D     &kp F               &kp G        &kp H               &kp J  &kp K             &kp L    &kp SEMI  &kp SQT
+&kp LSHFT  &kp Z  &kp X  &kp C     &kp V               &kp B        &kp N               &kp M  &kp COMMA         &kp DOT  &kp FSLH  &kp RSHFT
+                         &kp BSPC  &layer_1_gui_dance  &kp SPACE    &super_shift_dance  &mo 2  &altgr_alt_dance
             >;
         };
 
