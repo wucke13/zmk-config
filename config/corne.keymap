@@ -69,7 +69,7 @@
             compatible = "zmk,behavior-tap-dance";
             label = "LAYER_1_GUI_DANCE";
             #binding-cells = <0>;
-            bindings = <&to 1>, <&kp LEFT_GUI>, <&kp LS(LEFT_GUI)>;
+            bindings = <&mo 1>, <&kp LEFT_GUI>, <&kp LS(LEFT_GUI)>;
         };
     };
 
