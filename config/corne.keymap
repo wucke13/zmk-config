@@ -28,8 +28,8 @@
             key-positions = <19 20>;
         };
 
-        esc {
-            bindings = <&kp ESCAPE>;
+        space {
+            bindings = <&kp SPACE>;
             key-positions = <15 16>;
         };
 
@@ -47,6 +47,11 @@
             bindings = <&bt BT_CLR>;
             key-positions = <39 36>;
             layers = <3>;
+        };
+
+        escape {
+            bindings = <&kp ESCAPE>;
+            key-positions = <13 14>;
         };
     };
 
